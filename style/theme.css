@@ -1,0 +1,58 @@
+.container
+{
+  margin: 3% auto;
+  max-width: 768px;
+}
+
+.heading
+{
+  opacity: 50%;
+}
+
+.theme
+{
+  width: 200px;
+  height: 200px;
+  margin: 10% auto;
+  border-radius: 7%;
+  transition: 0.3s;
+  box-shadow: 0 0 10px gray;
+}
+
+.done:hover
+{
+  box-shadow: 0 0 30px #00cc00;
+  -webkit-transform: scale(1.2);
+  -ms-transform: scale(1.2);
+  transform: scale(1.2);
+  transition: 0.3s;
+}
+
+.done
+{
+  width: 200px;
+  height: 200px;
+  margin: 10% auto;
+  border-radius: 7%;
+  box-shadow: 0 0 20px #00cc00;
+  -webkit-transform: scale(1.1);
+  -ms-transform: scale(1.1);
+  transform: scale(1.1);
+  transition: 0.3s;
+}
+
+.theme:hover
+{
+  box-shadow: 0 0 30px gray;
+  -webkit-transform: scale(1.2);
+  -ms-transform: scale(1.2);
+  transform: scale(1.2);
+  transition: 0.3s;
+}
+
+.theme-img
+{
+  width: 200px;
+  height: 200px;
+  border-radius: 4%
+}

@@ -1,0 +1,17 @@
+.container
+{
+    margin-top: 2%;
+    min-width: 320px;
+}
+
+.form-group
+{
+  min-width: 310px;
+  width: 100%;
+}
+
+.heading
+{
+  opacity: 50%;
+  margin-bottom: 2%;
+}

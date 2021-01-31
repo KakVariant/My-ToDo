@@ -1,0 +1,16 @@
+form
+{
+    width: 25%;
+    min-width: 320px;
+    margin: auto;
+}
+
+h2
+{
+    text-align: center;
+}
+
+.container
+{
+    margin-top: 5%;
+}

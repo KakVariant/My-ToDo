@@ -34,7 +34,7 @@ if (count($user) == 0) {
     $emailName = preg_replace('/@|\./','',$email);
 
     $mysql->query("INSERT INTO `register`(`email`, `name`, `pass`, `theme`) VALUES('$email', '$name', '$pass', 1)");
-    $mysql->query("CREATE TABLE $emailName (id INT NOT NULL Primary key AUTO_INCREMENT, task VARCHAR(50) NOT NULL, activity BOOLEAN NOT NULL)");
+    $mysql->query("CREATE TABLE $emailName (id INT NOT NULL Primary key AUTO_INCREMENT, task VARCHAR(50) NOT NULL, activity BOOLEAN NOT NULL, priority INT NOT NULL)");
     $mysql->close();
 
     setcookie("email", $email, time() + 3600 * 4, "/");

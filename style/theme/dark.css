@@ -4,9 +4,14 @@ body
   background-color: #1a1b1f;;
 }
 
-.heading
+.heading, .grad
 {
   color: white;
+}
+
+.bRow
+{
+  background-color: white;
 }
 
 .rep

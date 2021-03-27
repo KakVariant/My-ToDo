@@ -23,3 +23,13 @@ h1
     margin-left: auto;
     margin-right: auto;
 }
+
+.low-pr
+{
+    display: none;
+}
+
+.form-control:focus ~ .low-pr
+{
+    color: black;
+}

@@ -10,6 +10,13 @@ if (isset($_COOKIE["email"]) == 1):
     ?>
     <link rel="stylesheet" href="/MyToDo/style/todo.css">
     <div class="container d-flex justify-content-center">
+
+
+
+
+
+<!-- Форма для добавления задачи -->
+
         <form action="/MyToDo/action/add.php" method="POST">
             <div class="form-group">
                 <h1 class="heading"><em>Your ToDo, <?=$_COOKIE["name"]?>)</em></h1>
@@ -18,11 +25,42 @@ if (isset($_COOKIE["email"]) == 1):
                 <div class="input-group mb-3">
                     <input <?php echo "style=\"border-color: #35363b; ".colors()."\""; ?> autocomplete="off" maxlength="50" type="text" class="form-control" name="task" placeholder="Добавить новую задачу." aria-describedby="button-addon2">
                     <div class="input-group-append">
-                        <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Добавить</button>
+                        <a class="btn btn-outline-secondary" data-toggle="modal" name="add_medium" data-target="#exampleModal">Добавить</a>
                     </div>
                 </div>
             </div>
-            <br />
+
+
+
+
+
+
+
+<!-- Модальное окно с выбором приоритета: -->
+
+            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content" <?php echo "style=\"".colors()."\""; ?>>
+                        <div class="modal-header" style="border-bottom-color: #808080;">
+                            <h5 class="modal-title" id="exampleModalLabel">Выберите приоритет задачи:</h5>
+                        </div>
+                        <div class="modal-body d-flex justify-content-around">
+                            <button type="submit" name="add_low" class="btn btn-outline-success">Слабый</button>
+                            <button type="submit" name="add_medium" class="btn btn-outline-warning">Средний</button>
+                            <button type="submit" name="add_hard" class="btn btn-outline-danger">Высокий</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+
+
+<!-- Форма со списком заданий -->
+
             <form>
                 <ul class="list-group">
                     <?php

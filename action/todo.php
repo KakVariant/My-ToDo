@@ -228,6 +228,8 @@ if (isset($_COOKIE["email"]) == 1):
                     printTaskDone(query());
                     ?>
                 </ul>
+                <br />
+                <br />
             </form>
         </form>
     </div>

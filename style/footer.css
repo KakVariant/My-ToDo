@@ -1,0 +1,31 @@
+.footer
+{
+    text-align: center;
+    background-color: #31373e;
+    border-radius: 0;
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+}
+
+html
+{
+    position: relative;
+    min-height: 100%;
+}
+
+.footer-icon
+{
+    opacity: 50%;
+    height: 30px;
+    border: 2px solid black;
+    border-radius: 6px;
+    transition: 0.4s;
+}
+
+.footer-icon:hover
+{
+    box-shadow: 0 0 5px black;
+    opacity: 100%;
+    transition: 0.4s;
+}

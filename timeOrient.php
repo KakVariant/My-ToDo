@@ -1,4 +1,5 @@
 <?php
+date_default_timezone_set('Europe/Kiev');
 $sunrise = date_sunrise(time(), SUNFUNCS_RET_STRING, 50.45334610929983, 30.60373268410596, 90, 1);
 $sunset = date_sunset(time(), SUNFUNCS_RET_STRING, 50.45334610929983, 30.60373268410596, 90, 1);
 

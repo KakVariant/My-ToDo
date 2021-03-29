@@ -77,7 +77,16 @@
     </button>
     <div class="collapse navbar-collapse" id="collapsibleNavbar">
       <ul class="navbar-nav">
-        <?php if($_SERVER['REQUEST_URI'] != "/MyToDo/greeting/login.php" && $_SERVER['REQUEST_URI'] != "/MyToDo/greeting/reg.php"  && $_SERVER['REQUEST_URI'] != "/MyToDo/theme/theme.php" && $_SERVER['REQUEST_URI'] != "/MyToDo/action/recovery.php")
+        <?php
+        if($_SERVER['REQUEST_URI'] != "/MyToDo/greeting/login.php" && $_SERVER['REQUEST_URI'] != "/MyToDo/greeting/reg.php"  && $_SERVER['REQUEST_URI'] != "/MyToDo/action/diary.php" && $_SERVER['REQUEST_URI'] != "/MyToDo/action/recovery.php")
+        {
+            echo "
+          <li class=\"nav-item\">
+          <a href=\"/MyToDo/action/diary.php\" class=\"nav-link\">Дневник</a>
+          </li>
+          ";
+        }
+        if($_SERVER['REQUEST_URI'] != "/MyToDo/greeting/login.php" && $_SERVER['REQUEST_URI'] != "/MyToDo/greeting/reg.php"  && $_SERVER['REQUEST_URI'] != "/MyToDo/theme/theme.php" && $_SERVER['REQUEST_URI'] != "/MyToDo/action/recovery.php")
         {
           echo "
           <li class=\"nav-item\">

@@ -1,0 +1,65 @@
+.container
+{
+    width: 60%;
+    min-width: 300px;
+}
+
+h1
+{
+    text-align: center;
+    opacity: 50%;
+}
+
+.select-sort
+{
+    border-bottom-right-radius: 0;
+    border-top-right-radius: 0;
+}
+
+.sort-button
+{
+    border-bottom-left-radius: 0;
+    border-top-left-radius: 0;
+}
+
+.button-add
+{
+    margin-top: 6px;
+    margin-right: 16px;
+}
+
+.button-q
+{
+    margin: 2px;
+}
+
+.list-group-item
+{
+    transition: 0.4s;
+}
+
+.active-list:hover
+{
+    background-color: #046582;
+    color: #1b1717;
+}
+
+.active-list:visited
+{
+    background-color: #046582;
+    color: #1b1717;
+}
+
+.active-list
+{
+    background-color: #046582;
+    color: #1b1717;
+}
+
+.list-group-item:hover
+{
+    transition: 0.4s;
+    margin-left: 30px;
+    border-radius: 5px;
+    box-shadow: 0 0 20px black;
+}

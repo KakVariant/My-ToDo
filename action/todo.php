@@ -150,7 +150,7 @@ if (isset($_COOKIE["email"]) == 1):
             </div>
             <div class="form-group">
                 <div class="input-group mb-3">
-                    <input <?php echo "style=\"border-color: #35363b; ".colors()."\""; ?> autocomplete="off" maxlength="50" type="text" class="form-control" name="task" placeholder="Добавить новую задачу." aria-describedby="button-addon2">
+                    <input <?php echo "style=\"border-color: #35363b; ".colors()."\""; ?> autocomplete="off" maxlength="50" type="text" class="form-control" name="task" placeholder="Добавить новую задачу" aria-describedby="button-addon2">
                     <div class="input-group-append">
                         <a class="btn btn-outline-secondary" data-toggle="modal" name="add_medium" data-target="#exampleModal">Добавить</a>
                     </div>

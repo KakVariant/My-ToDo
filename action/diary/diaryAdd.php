@@ -6,7 +6,7 @@ if (isset($_POST["title"]) == 1)
 
     $title = $_POST["title"];
     $description = $_POST["description"];
-    $date = date("m.d.y");
+    $date = date('d.m.Y');
     $time = date("H:i");
 
     if($title != "")

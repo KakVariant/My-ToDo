@@ -4,6 +4,105 @@ include $_SERVER['DOCUMENT_ROOT'] . '/MyToDo/body/header.php';
 require $_SERVER['DOCUMENT_ROOT'] . '/MyToDo/theme/themeFunc.php';
 ?>
 <link rel="stylesheet" href="/MyToDo/style/diary.css">
+<?php
+
+
+
+//Функция для вывода всех записей дневника
+function showListDiary($result)
+{
+    while (($row = $result->fetch_assoc()) != false)
+    {
+        if ($row["activity"] == 1)
+        {
+            $style = "";
+            $class = "active-list";
+        }
+        else
+        {
+            $style = "style=\"".colors()."\"";
+            $class = "";
+        }
+
+        echo "<a ".$style." data-description='".$row["description"]."' data-title='".$row["title"]."' data-whatever=\"".$row["id"]."\" href=\"#\" data-toggle=\"modal\" data-target=\"#exampleModalQ\" class=\"list-group-item list-group-item-action ".$class."\">
+            <div class=\"d-flex w-100 justify-content-between\">
+                <h5 class=\"mb-1\">".$row["title"]."</h5>
+                <small>".$row["time"]." | ".$row["date"]."</small>
+            </div>
+            <p class=\"mb-1\">".$row["description"]."</p>
+        </a>";
+    }
+}
+
+
+
+
+// Вывод всех избранных записей
+
+function showListDiaryMark($result)
+{
+    while (($row = $result->fetch_assoc()) != false)
+    {
+        if ($row["activity"] == 1) {
+            $style = "";
+            $class = "active-list";
+
+            echo "<a " . $style . " data-description='" . $row["description"] . "' data-title='" . $row["title"] . "' data-whatever=\"" . $row["id"] . "\" href=\"#\" data-toggle=\"modal\" data-target=\"#exampleModalQ\" class=\"list-group-item list-group-item-action " . $class . "\">
+            <div class=\"d-flex w-100 justify-content-between\">
+                <h5 class=\"mb-1\">" . $row["title"] . "</h5>
+                <small>" . $row["time"] . " | " . $row["date"] . "</small>
+            </div>
+            <p class=\"mb-1\">" . $row["description"] . "</p>
+        </a>";
+        }
+    }
+}
+
+
+
+// Вывод всех записей за определённый день
+
+function showListDiaryDay($result)
+{
+    while (($row = $result->fetch_assoc()) != false)
+    {
+        if (!strcmp($_COOKIE["date"], $row["date"])) {
+            if ($row["activity"] == 1) {
+                $style = "";
+                $class = "active-list";
+            } else {
+                $style = "style=\"" . colors() . "\"";
+                $class = "";
+            }
+
+            echo "<a " . $style . " data-description='" . $row["description"] . "' data-title='" . $row["title"] . "' data-whatever=\"" . $row["id"] . "\" href=\"#\" data-toggle=\"modal\" data-target=\"#exampleModalQ\" class=\"list-group-item list-group-item-action " . $class . "\">
+            <div class=\"d-flex w-100 justify-content-between\">
+                <h5 class=\"mb-1\">" . $row["title"] . "</h5>
+                <small>" . $row["time"] . " | " . $row["date"] . "</small>
+            </div>
+            <p class=\"mb-1\">" . $row["description"] . "</p>
+        </a>";
+        }
+    }
+}
+
+
+
+
+
+
+//Функция для отправки запроса в БД
+function query()
+{
+    $email = preg_replace('/@|\./','', $_COOKIE["email"])."diary";
+
+    require $_SERVER['DOCUMENT_ROOT'] . '/MyToDo/db/dbconfig.php';
+
+    $result = $mysql->query("SELECT * FROM `$email` ORDER BY `$email`.`id` DESC");
+    $mysql->close();
+    return $result;
+}
+?>
 
 <br />
 <div class="container">
@@ -29,10 +128,10 @@ require $_SERVER['DOCUMENT_ROOT'] . '/MyToDo/theme/themeFunc.php';
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content" <?php echo "style=\"".colors()."\""; ?>>
                     <div class="modal-header" style="border-bottom-color: #808080;">
-                        <h5 class="modal-title" id="exampleModalLabel">Введите подробности:</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">Введите описане (Болие подробно):</h5>
                     </div>
                     <div class="modal-body">
-                        <textarea <?php echo "style=\"border-color: #35363b; ".colors()."\""; ?> class="form-control" id="exampleFormControlTextarea1" rows="3" name="description"></textarea>
+                        <textarea <?php echo "style=\"border-color: #35363b; ".colors()."\""; ?> class="form-control" id="exampleFormControlTextarea1" rows="3" name="description" placeholder="Введите что-то подобное - ''Я проснулся и готов покорять мир.''"></textarea>
                         <div class="row justify-content-end">
                             <button type="submit" class="btn btn-outline-secondary button-add">Добавить</button>
                         </div>
@@ -45,14 +144,13 @@ require $_SERVER['DOCUMENT_ROOT'] . '/MyToDo/theme/themeFunc.php';
 
 <!--    Форма для сортировки-->
 
-    <form class="d-flex justify-content-around" action="/MyToDo/action/diary/diaryAct.php" method="post">
-    <select <?php echo "style=\"border-color: #35363b; ".colors()."\""; ?> class="form-control select-sort">
-        <option selected value="sortDays">Сортировать по дням</option>
-        <option value="days">Отобразить заметки за сегодня</option>
-        <option value="treeDays">Отобразить заметки за 3 дня</option>
-        <option value="sevenDays">Отобразить заметки за неделю</option>
-        <option value="sevenDays">Отобразить только избранные заметки</option>
-    </select>
+    <form class="d-flex justify-content-around" action="/MyToDo/action/diary/diarySort.php" method="post">
+        <select onchange='findOption(this)' <?php echo "style=\"".colors()."\""; ?> class="custom-select select-sort" name="select-sort" id="select-sort" required>
+            <option <?php if (!strcmp($_COOKIE["sort"], "all")) {echo "selected";} ?> value="all">Показать все записи</option>
+            <option <?php if (!strcmp($_COOKIE["sort"], "mark")) {echo "selected";} ?> value="mark">Показать только избранные записи</option>
+            <option <?php if (!strcmp($_COOKIE["sort"], "day")) {echo "selected";} ?> value="day">Показать записи за определённый день</option>
+        </select>
+        <input <?php echo "style=\"".colors()."\""; ?> class="inpDate <?php if (strcmp($_COOKIE["sort"], "day")) {echo "hidden";} ?>" name="inpDate" type="date" id="inpDate" value="<?php echo $_COOKIE["date-sf"];?>" min="2001-08-07" max="<?php echo date('Y-m-d')?>">
         <button type="submit" class="btn btn-outline-secondary sort-button">Сортировать</button>
     </form>
     <br />
@@ -61,27 +159,20 @@ require $_SERVER['DOCUMENT_ROOT'] . '/MyToDo/theme/themeFunc.php';
 <!--    Список всех записей-->
 
     <div class="list-group">
-        <a data-whatever="1" href="#" data-toggle="modal" data-target="#exampleModalQ" class="list-group-item list-group-item-action active-list">
-            <div class="d-flex w-100 justify-content-between">
-                <h5 class="mb-1">Проснулся</h5>
-                <small>8:27 | 29.03.2021</small>
-            </div>
-            <p class="mb-1">Сегодня я проснулся и хуёво себя чувствую)</p>
-        </a>
-        <a <?php echo "style=\"".colors()."\""; ?> data-whatever="2" href="#" data-toggle="modal" data-target="#exampleModalQ" class="list-group-item list-group-item-action">
-            <div class="d-flex w-100 justify-content-between">
-                <h5 class="mb-1">Сходил в туалет</h5>
-                <small class="text-muted">8:38 | 29.03.2021</small>
-            </div>
-            <p class="mb-1">Я сходил в туалет и стал себя чувствовать ещё хуже!) Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequatur, cupiditate debitis doloremque illum nesciunt odio veniam? Facilis ipsam labore natus perferendis quo quod, similique velit. Impedit maiores molestiae tempore voluptatem?</p>
-        </a>
-        <a <?php echo "style=\"".colors()."\""; ?> data-whatever="3" href="#" data-toggle="modal" data-target="#exampleModalQ" class="list-group-item list-group-item-action">
-            <div class="d-flex w-100 justify-content-between">
-                <h5 class="mb-1">Почистил зубы</h5>
-                <small class="text-muted">8:43 | 29.03.2021</small>
-            </div>
-            <p class="mb-1">Почистил зубы и теперь я готов упасть в дипрессию.</p>
-        </a>
+        <?php
+        if (!strcmp($_COOKIE["sort"], "all"))
+        {
+            showListDiary(query());
+        }
+        if (!strcmp($_COOKIE["sort"], "mark"))
+        {
+            showListDiaryMark(query());
+        }
+        if (!strcmp($_COOKIE["sort"], "day"))
+        {
+            showListDiaryDay(query());
+        }
+        ?>
     </div>
 
 
@@ -99,11 +190,43 @@ require $_SERVER['DOCUMENT_ROOT'] . '/MyToDo/theme/themeFunc.php';
                 <div class="modal-body">
                     <div class="row justify-content-end">
                         <a id="bookmarks" href="#" class="btn btn-outline-primary button-q">Добавить / убрать из закладок</a>
+                        <a data-whatever="" data-dismiss="modal" aria-label="Close" data-toggle="modal" data-target="#exampleModalEdit" id="edit" href="#" class="btn btn-outline-warning button-q">Редактировать</a>
                         <a id="del" href="#" class="btn btn-outline-danger button-q">Удалить</a>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
+
+
+<!--Модальное окно для редактирования записки-->
+
+    <div class="modal fade" id="exampleModalEdit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <form action="/MyToDo/action/diary/diaryEdit.php" method="post">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content" <?php echo "style=\"".colors()."\""; ?>>
+                    <div class="modal-header" style="border-bottom-color: #808080;">
+                        <h5 class="modal-title" id="exampleModalLabel">Редактируйте:</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span <?php echo "style=\"".colors()."\""; ?> aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="recipient-name" class="col-form-label">Заголовок:</label>
+                            <input <?php echo "style=\"border-color: #35363b; ".colors()."\""; ?> type="text" class="form-control" name="title" id="title" autocomplete="off" maxlength="50" placeholder="Я проснулся.">
+                        </div>
+                        <div class="form-group">
+                            <label for="recipient-name" class="col-form-label">Описание:</label>
+                            <textarea <?php echo "style=\"border-color: #35363b; ".colors()."\""; ?> class="form-control" id="description" rows="3" name="description" maxlength="300" placeholder="Сейчас я проснулся и готов покорять мир."></textarea>
+                        </div>
+                        <div class="row justify-content-end">
+                            <button type="submit" name="ok" class="btn btn-outline-secondary button-add edit">Редактировать</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
     </div>
 
 </div>
@@ -112,9 +235,40 @@ require $_SERVER['DOCUMENT_ROOT'] . '/MyToDo/theme/themeFunc.php';
     $('#exampleModalQ').on('show.bs.modal', function (event) {
         var button = $(event.relatedTarget);
         var recipient = button.data('whatever');
-        document.querySelector("#bookmarks").href = 'diary/diary-bookmarks.php?id=' + recipient;
-        document.querySelector("#del").href = 'diary/diary-del.php?id=' + recipient;
+        var title = button.data('title');
+        var description = button.data('description');
+
+        document.querySelector("#bookmarks").href = 'diary/diaryMark.php?id=' + recipient;
+        document.querySelector("#edit").dataset.whatever = recipient;
+        document.querySelector("#edit").dataset.title = title;
+        document.querySelector("#edit").dataset.description = description;
+        document.querySelector("#del").href = 'diary/diaryDelete.php?id=' + recipient;
     })
+
+    $('#exampleModalEdit').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget);
+        var recipient = button.data('whatever');
+        var title = button.data('title');
+        var description = button.data('description');
+
+        document.querySelector(".edit").value = recipient;
+        document.querySelector("#title").value = title;
+        document.querySelector("#description").value = description;
+    })
+
+    function findOption(select) {
+        if(select.value != "day")
+        {
+            if (!document.querySelector("#inpDate").classList.contains("hidden"))
+            {
+                document.querySelector("#inpDate").classList.add("hidden");
+            }
+        }
+        else
+        {
+            document.querySelector("#inpDate").classList.remove("hidden");
+        }
+    }
 </script>
 <?php
 include $_SERVER['DOCUMENT_ROOT'] . '/MyToDo/body/footer.php';

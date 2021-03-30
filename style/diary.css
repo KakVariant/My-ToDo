@@ -63,3 +63,31 @@ h1
     border-radius: 5px;
     box-shadow: 0 0 20px black;
 }
+
+.inpDate
+{
+    width: 100%;
+    border: 1px solid #35363b;
+    border-left: 1px solid #35363b;
+    border-right: none;
+    transition: 0.4s;
+}
+
+.select-sort:hover
+{
+    cursor: pointer;
+}
+
+.hidden
+{
+    width: 0;
+    border-left: none;
+    transition: 0.4s;
+}
+
+.select-sort
+{
+    border: 1px solid #35363b;
+    border-right: none;
+    border-radius: 5px 0px 0px 5px;
+}

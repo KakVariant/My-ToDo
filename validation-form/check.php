@@ -36,11 +36,14 @@ if (count($user) == 0) {
 
     $mysql->query("INSERT INTO `register`(`email`, `name`, `pass`, `theme`) VALUES('$email', '$name', '$pass', 1)");
     $mysql->query("CREATE TABLE $emailName (id INT NOT NULL Primary key AUTO_INCREMENT, task VARCHAR(50) NOT NULL, activity BOOLEAN NOT NULL, priority INT NOT NULL)");
-    $mysql->query("CREATE TABLE $emailAndDiary (id INT NOT NULL Primary key AUTO_INCREMENT, title VARCHAR(50) NOT NULL, description VARCHAR(50) NOT NULL, date VARCHAR(50) NOT NULL, time VARCHAR(50) NOT NULL, activity BOOLEAN NOT NULL)");
+    $mysql->query("CREATE TABLE $emailAndDiary (id INT NOT NULL Primary key AUTO_INCREMENT, title VARCHAR(50) NOT NULL, description VARCHAR(300) NOT NULL, date VARCHAR(50) NOT NULL, time VARCHAR(50) NOT NULL, activity BOOLEAN NOT NULL)");
     $mysql->close();
 
     setcookie("email", $email, time() + 3600 * 4, "/");
     setcookie("name", $name, time() + 3600 * 4, "/");
+    setcookie("sort", "all", time() + 3600 * 4, "/");
+    date_default_timezone_set('Europe/Kiev');
+    setcookie("date", date('d.m.Y'), time() + 3600 * 4, "/");
     header("Location: /MyToDo/index.php");
 }
 else

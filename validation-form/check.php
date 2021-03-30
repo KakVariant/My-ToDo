@@ -32,7 +32,7 @@ if (count($user) == 0) {
     $pass = md5($pass . "fh43gfh4");
 
     $emailName = preg_replace('/@|\./','',$email);
-    $emailAndDiary = $emailName . "Diary";
+    $emailAndDiary = $emailName . "diary";
 
     $mysql->query("INSERT INTO `register`(`email`, `name`, `pass`, `theme`) VALUES('$email', '$name', '$pass', 1)");
     $mysql->query("CREATE TABLE $emailName (id INT NOT NULL Primary key AUTO_INCREMENT, task VARCHAR(50) NOT NULL, activity BOOLEAN NOT NULL, priority INT NOT NULL)");

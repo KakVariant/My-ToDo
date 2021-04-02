@@ -3,6 +3,11 @@ session_start();
 require $_SERVER['DOCUMENT_ROOT'] . '/MyToDo/db/dbconfig.php';
 
 $email = $_COOKIE["email"];
+
+$result = $mysql->query("SELECT * FROM `register` WHERE `secure_key` = '$email' ORDER BY `register`.`email` DESC");
+$row = $result->fetch_assoc();
+
+$email = $row["email"];
 $oldPass = $_POST["oldPassword"];
 $oldPass = md5($oldPass . "fh43gfh4");
 $newPass = filter_var(trim($_POST["newPassword"]), FILTER_SANITIZE_STRING);

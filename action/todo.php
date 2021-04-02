@@ -13,8 +13,8 @@ require $_SERVER['DOCUMENT_ROOT'] . '/MyToDo/timeOrient.php';
 function isPriority($priority)
 {
     require $_SERVER['DOCUMENT_ROOT'] . '/MyToDo/db/dbconfig.php';
-    $email = preg_replace('/@|\./','', $_COOKIE["email"]);
-    $result = $mysql->query("SELECT * FROM `$email` WHERE `priority` = '$priority' AND `activity` = '0'");
+    $email = $_COOKIE["email"];
+    $result = $mysql->query("SELECT * FROM `todo` WHERE `priority` = '$priority' AND `activity` = '0' AND `user_id` = '$email'");
     $mysql->close();
     $task = $result->fetch_assoc();
     if ($task)
@@ -33,8 +33,8 @@ function isPriority($priority)
 function isDone()
 {
     require $_SERVER['DOCUMENT_ROOT'] . '/MyToDo/db/dbconfig.php';
-    $email = preg_replace('/@|\./','', $_COOKIE["email"]);
-    $result = $mysql->query("SELECT * FROM `$email` WHERE `activity` = '1'");
+    $email =  $_COOKIE["email"];
+    $result = $mysql->query("SELECT * FROM `todo` WHERE `activity` = '1'  AND `user_id` = '$email'");
     $mysql->close();
     $task = $result->fetch_assoc();
     if ($task)
@@ -53,16 +53,16 @@ function printTaskHight($result)
 {
     while (($row = $result->fetch_assoc()) != false)
     {
-        if ($row["priority"] == 2) {
+            if ($row["priority"] == 2) {
 
-            if ($row["activity"] == 0) {
-                echo "<li style=\"height: 50px; " . colors() . " margin-bottom: 12px; border: 1px solid #35363b; border-left:none; border-right: none; border-radius: 3%;\" class=\"list-group-item d-flex justify-content-between align-items-center\" aria-describedby=\"button-addon2\">
-                                <a style=\"border-radius: 4px 0px 0px 4px; height: 100%; padding: 0 19px; display: inline-flex; align-items: center;\" type=\"button\" href=\"edit.php?id=" . $row["id"] . "\" class=\"btn btn-outline-success\">✓</a>
-                            <div style=\"" . fontsFix($row["task"], 1) . " opacity: 100%; line-height: 17px;\" class=\"font-weight-bold\"><em>" . $row["task"] . "</em></div>
-                                    <a style=\" padding: 0 20px; border-radius: 0px 4px 4px 0px; height: 100%; display: inline-flex; align-items: center;\" class=\"btn btn-outline-danger\" href=\"delete.php?id=" . $row["id"] . "\" id=\"button-addon2\">Х</a>
-                        </li>";
+                if ($row["activity"] == 0) {
+                    echo "<li style=\"height: 50px; " . colors() . " margin-bottom: 12px; border: 1px solid #35363b; border-left:none; border-right: none; border-radius: 3%;\" class=\"list-group-item d-flex justify-content-between align-items-center\" aria-describedby=\"button-addon2\">
+                                    <a style=\"border-radius: 4px 0px 0px 4px; height: 100%; padding: 0 19px; display: inline-flex; align-items: center;\" type=\"button\" href=\"edit.php?id=" . $row["id"] . "\" class=\"btn btn-outline-success\">✓</a>
+                                <div style=\"" . fontsFix($row["task"], 1) . " opacity: 100%; line-height: 17px;\" class=\"font-weight-bold\"><em>" . $row["task"] . "</em></div>
+                                        <a style=\" padding: 0 20px; border-radius: 0px 4px 4px 0px; height: 100%; display: inline-flex; align-items: center;\" class=\"btn btn-outline-danger\" href=\"delete.php?id=" . $row["id"] . "\" id=\"button-addon2\">Х</a>
+                            </li>";
+                }
             }
-        }
     }
 }
 
@@ -73,16 +73,16 @@ function printTaskMedium($result)
 {
     while (($row = $result->fetch_assoc()) != false)
     {
-        if ($row["priority"] == 1) {
+            if ($row["priority"] == 1) {
 
-            if ($row["activity"] == 0) {
-                echo "<li style=\"height: 50px; " . colors() . " margin-bottom: 12px; border: 1px solid #35363b; border-left:none; border-right: none; border-radius: 3%;\" class=\"list-group-item d-flex justify-content-between align-items-center\" aria-describedby=\"button-addon2\">
+                if ($row["activity"] == 0) {
+                    echo "<li style=\"height: 50px; " . colors() . " margin-bottom: 12px; border: 1px solid #35363b; border-left:none; border-right: none; border-radius: 3%;\" class=\"list-group-item d-flex justify-content-between align-items-center\" aria-describedby=\"button-addon2\">
                                 <a style=\"border-radius: 4px 0px 0px 4px; height: 100%; padding: 0 19px; display: inline-flex; align-items: center;\" type=\"button\" href=\"edit.php?id=" . $row["id"] . "\" class=\"btn btn-outline-success\">✓</a>
                             <div style=\"" . fontsFix($row["task"], 1) . " opacity: 100%; line-height: 17px;\" class=\"font-weight-bold\"><em>" . $row["task"] . "</em></div>
                                     <a style=\" padding: 0 20px; border-radius: 0px 4px 4px 0px; height: 100%; display: inline-flex; align-items: center;\" class=\"btn btn-outline-danger\" href=\"delete.php?id=" . $row["id"] . "\" id=\"button-addon2\">Х</a>
                         </li>";
+                }
             }
-        }
     }
 }
 
@@ -93,16 +93,16 @@ function printTaskLow($result)
 {
     while (($row = $result->fetch_assoc()) != false)
     {
-        if ($row["priority"] == 0) {
+            if ($row["priority"] == 0) {
 
-            if ($row["activity"] == 0) {
-                echo "<li style=\"height: 50px; " . colors() . " margin-bottom: 12px; border: 1px solid #35363b; border-left:none; border-right: none; border-radius: 3%;\" class=\"list-group-item d-flex justify-content-between align-items-center\" aria-describedby=\"button-addon2\">
+                if ($row["activity"] == 0) {
+                    echo "<li style=\"height: 50px; " . colors() . " margin-bottom: 12px; border: 1px solid #35363b; border-left:none; border-right: none; border-radius: 3%;\" class=\"list-group-item d-flex justify-content-between align-items-center\" aria-describedby=\"button-addon2\">
                                 <a style=\"border-radius: 4px 0px 0px 4px; height: 100%; padding: 0 19px; display: inline-flex; align-items: center;\" type=\"button\" href=\"edit.php?id=" . $row["id"] . "\" class=\"btn btn-outline-success\">✓</a>
                             <div style=\"" . fontsFix($row["task"], 1) . " opacity: 100%; line-height: 17px;\" class=\"font-weight-bold\"><em>" . $row["task"] . "</em></div>
                                     <a style=\" padding: 0 20px; border-radius: 0px 4px 4px 0px; height: 100%; display: inline-flex; align-items: center;\" class=\"btn btn-outline-danger\" href=\"delete.php?id=" . $row["id"] . "\" id=\"button-addon2\">Х</a>
                         </li>";
+                }
             }
-        }
     }
 }
 
@@ -113,30 +113,30 @@ function printTaskDone($result)
 {
     while (($row = $result->fetch_assoc()) != false)
     {
-        if ($row["activity"] == 1) {
-            echo "<li style=\"height: 50px; " . colors() . " margin-bottom: 12px; border: 1px solid #35363b; border-left:none; border-right: none; border-radius: 3%;\" class=\"list-group-item d-flex justify-content-between align-items-center\" aria-describedby=\"button-addon2\">
+            if ($row["activity"] == 1) {
+                echo "<li style=\"height: 50px; " . colors() . " margin-bottom: 12px; border: 1px solid #35363b; border-left:none; border-right: none; border-radius: 3%;\" class=\"list-group-item d-flex justify-content-between align-items-center\" aria-describedby=\"button-addon2\">
                                 <a style=\"border-radius: 4px 0px 0px 4px; height: 100%; padding: 0 19px; display: inline-flex; align-items: center;\" type=\"button\" href=\"edit.php?id=" . $row["id"] . "\" class=\" btn btn-success\">✓</a>
                             <div style=\"" . fontsFix($row["task"], 0) . " opacity: 60%; line-height: 17px;\"><em><s>" . $row["task"] . "</s></em></div>
                                     <a style=\" padding: 0 20px; border-radius: 0px 4px 4px 0px; height: 100%; display: inline-flex; align-items: center;\" class=\"btn btn-outline-danger\" href=\"delete.php?id=" . $row["id"] . "\" id=\"button-addon2\">Х</a>
                         </li>";
-        }
+            }
     }
 }
 
 function query()
 {
-    $email = preg_replace('/@|\./','', $_COOKIE["email"]);
-
     require $_SERVER['DOCUMENT_ROOT'] . '/MyToDo/db/dbconfig.php';
 
-    $result = $mysql->query("SELECT * FROM `$email` ORDER BY `$email`.`id` DESC");
+    $email = $_COOKIE["email"];
+
+    $result = $mysql->query("SELECT * FROM `todo` WHERE `user_id` = '$email' ORDER BY `todo`.`id` DESC");
     $mysql->close();
     return $result;
 }
 if (isset($_COOKIE["email"]) == 1):
     ?>
     <link rel="stylesheet" href="/MyToDo/style/todo.css">
-    <div class="container d-flex justify-content-center">
+    <div class="container-sm d-flex justify-content-center">
 
 
 

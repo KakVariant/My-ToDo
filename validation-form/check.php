@@ -5,7 +5,7 @@ $email = filter_var(trim($_POST["email"]), FILTER_SANITIZE_STRING);
 $name = filter_var(trim($_POST["name"]), FILTER_SANITIZE_STRING);
 $pass = filter_var(trim($_POST["pass"]), FILTER_SANITIZE_STRING);
 
-$email = strtolower($email);
+$emailDefault = strtolower($email);
 
 if (!filter_var($email, FILTER_VALIDATE_EMAIL))
 {
@@ -26,17 +26,13 @@ if (!filter_var($email, FILTER_VALIDATE_EMAIL))
 
 require $_SERVER['DOCUMENT_ROOT'] . '/MyToDo/db/dbconfig.php';
 
-$result = $mysql->query("SELECT * FROM `register` WHERE `email` = '$email'");
+$email = md5(strtolower($emailDefault)."gvmbvjmj");
+$result = $mysql->query("SELECT * FROM `register` WHERE `secure_key` = '$email'");
 $user = $result->fetch_assoc();
 if (count($user) == 0) {
     $pass = md5($pass . "fh43gfh4");
 
-    $emailName = preg_replace('/@|\./','',$email);
-    $emailAndDiary = $emailName . "diary";
-
-    $mysql->query("INSERT INTO `register`(`email`, `name`, `pass`, `theme`) VALUES('$email', '$name', '$pass', 1)");
-    $mysql->query("CREATE TABLE $emailName (id INT NOT NULL Primary key AUTO_INCREMENT, task VARCHAR(50) NOT NULL, activity BOOLEAN NOT NULL, priority INT NOT NULL)");
-    $mysql->query("CREATE TABLE $emailAndDiary (id INT NOT NULL Primary key AUTO_INCREMENT, title VARCHAR(50) NOT NULL, description VARCHAR(300) NOT NULL, date VARCHAR(50) NOT NULL, time VARCHAR(50) NOT NULL, activity BOOLEAN NOT NULL)");
+    $mysql->query("INSERT INTO `register`(`secure_key`, `email`, `name`, `pass`, `theme`) VALUES('$email', '$emailDefault', '$name', '$pass', 1)");
     $mysql->close();
 
     setcookie("email", $email, time() + 3600 * 4, "/");

@@ -1,6 +1,17 @@
 <?php
 session_start();
-$from = $_COOKIE["email"];
+
+
+require $_SERVER['DOCUMENT_ROOT'] . '/MyToDo/db/dbconfig.php';
+
+$email = $_COOKIE["email"];
+
+$result = $mysql->query("SELECT * FROM `register` WHERE `secure_key` = '$email' ORDER BY `register`.`email` DESC");
+$mysql->close();
+$row = $result->fetch_assoc();
+
+
+$from = $row["email"];
 $question = $_POST["question"];
 $to = "rkhorolskij@gmail.com";
 $subject = "Поддержка сайта MyToDo";

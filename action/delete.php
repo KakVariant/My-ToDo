@@ -1,11 +1,11 @@
 <?php
 $id = $_GET["id"];
-$email = preg_replace('/@|\./','', $_COOKIE["email"]);
+$email = $_COOKIE["email"];
 
 require $_SERVER['DOCUMENT_ROOT'] . '/MyToDo/db/dbconfig.php';
 
-$mysql->query("DELETE FROM `$email` WHERE `$email`.`id` = $id");
-$result = $mysql->query("SELECT * FROM `$email`");
+$mysql->query("DELETE FROM `todo` WHERE `todo`.`id` = $id");
+$result = $mysql->query("SELECT * FROM `todo` WHERE `user_id` = '$email'");
 $row = $result->fetch_assoc();
 if (count($row) == 0) {
   $mysql->query("ALTER TABLE `$email` AUTO_INCREMENT = 1");

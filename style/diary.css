@@ -1,8 +1,6 @@
-.container
+.container-sm
 {
-    width: 50%;
-    min-width: 320px;
-    margin: auto;
+    max-width: 800px;
 }
 
 h1

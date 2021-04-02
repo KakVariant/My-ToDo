@@ -1,7 +1,7 @@
-.container
+.container-sm
 {
-  margin: 3% auto;
-  max-width: 768px;
+  max-width: 800px;
+  margin: 50px auto;
 }
 
 .heading
@@ -13,7 +13,7 @@
 {
   width: 200px;
   height: 200px;
-  margin: 10% auto;
+  margin: 15px;
   border-radius: 7%;
   transition: 0.3s;
   box-shadow: 0 0 10px gray;
@@ -32,8 +32,8 @@
 {
   width: 200px;
   height: 200px;
-  margin: 10% auto;
   border-radius: 7%;
+  margin: 15px;
   box-shadow: 0 0 20px #00cc00;
   -webkit-transform: scale(1.1);
   -ms-transform: scale(1.1);

@@ -14,7 +14,7 @@ function done($thems)
 ?>
 <link rel="stylesheet" href="/MyToDo/style/theme.css" type="text/css">
 <h1 class="heading d-flex justify-content-center">Выбор темы</h1>
-<div class="container row">
+<div class="container-sm d-flex justify-content-center flex-wrap">
   <div class="<?php done(1) ?>">
     <div><a href="theme-apply.php?theme=1"><img class="theme-img" src="/MyToDo/theme-icon/white.jpg" alt="white"></a></div>
   </div>

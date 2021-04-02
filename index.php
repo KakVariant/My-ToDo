@@ -5,7 +5,7 @@ require $_SERVER['DOCUMENT_ROOT'] . '/MyToDo/timeOrient.php';
 if(isset($_COOKIE["email"]))
 {
     $email = $_COOKIE["email"];
-    $result = $mysql->query("SELECT * FROM `register` WHERE `email` = '$email'");
+    $result = $mysql->query("SELECT * FROM `register` WHERE `secure_key` = '$email'");
     $mysql->close();
     $thm = $result->fetch_assoc();
     setcookie("name", $thm["name"], time() + 3600 * 4, "/");

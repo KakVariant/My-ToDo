@@ -4,13 +4,13 @@ require $_SERVER['DOCUMENT_ROOT'] . '/MyToDo/timeOrient.php';
 $email = filter_var(trim($_POST["email"]), FILTER_SANITIZE_STRING);
 $pass = filter_var(trim($_POST["pass"]), FILTER_SANITIZE_STRING);
 
-$email = strtolower($email);
+$email = md5(strtolower($email)."gvmbvjmj");
 
 $pass = md5($pass."fh43gfh4");
 
 require $_SERVER['DOCUMENT_ROOT'] . '/MyToDo/db/dbconfig.php';
 
-$result = $mysql->query("SELECT * FROM `register` WHERE `email` = '$email' AND `pass` = '$pass'");
+$result = $mysql->query("SELECT * FROM `register` WHERE `secure_key` = '$email' AND `pass` = '$pass'");
 $mysql->close();
 $user = $result->fetch_assoc();
 if (count($user) == 0)

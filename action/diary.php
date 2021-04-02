@@ -94,18 +94,18 @@ function showListDiaryDay($result)
 //Функция для отправки запроса в БД
 function query()
 {
-    $email = preg_replace('/@|\./','', $_COOKIE["email"])."diary";
-
     require $_SERVER['DOCUMENT_ROOT'] . '/MyToDo/db/dbconfig.php';
 
-    $result = $mysql->query("SELECT * FROM `$email` ORDER BY `$email`.`id` DESC");
+    $email = $_COOKIE["email"];
+
+    $result = $mysql->query("SELECT * FROM `diary` WHERE `user_id` = '$email' ORDER BY `diary`.`id` DESC");
     $mysql->close();
     return $result;
 }
 ?>
 
 <br />
-<div class="container">
+<div class="container-sm d-flex justify-content-center flex-column">
 
 <!--    Форма для ввода новой записи-->
 

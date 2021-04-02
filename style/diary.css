@@ -58,7 +58,7 @@ h1
 .list-group-item:hover
 {
     transition: 0.4s;
-    margin-left: 30px;
+    transform: translateX(30px);
     border-radius: 5px;
     box-shadow: 0 0 20px black;
 }
@@ -67,7 +67,6 @@ h1
 {
     width: 100%;
     border: 1px solid #35363b;
-    border-left: 1px solid #35363b;
     border-right: none;
     transition: 0.4s;
 }

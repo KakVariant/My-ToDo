@@ -1,11 +1,12 @@
+<link rel="stylesheet" href="/MyToDo/style/font-awesome/css/font-awesome.min.css">
 <link rel="stylesheet" href="/MyToDo/style/footer.css">
 <br />
 <br />
 <footer class="footer navbar-fixed-bottom">
     <div class="card-footer text-muted footer">
-        <a href="https://telegram.me/rkhorolskiy" target="_blank"><img class="footer-icon" src="/MyToDo/icon/telegram-icon.png" alt="telegram-icon"></a>
+        <a href="https://telegram.me/rkhorolskiy" target="_blank"><i class="fa fa-telegram telegram" aria-hidden="true"></i></a>
         The creator by <b>Rostik =)</b>
-        <a href="https://www.instagram.com/rkhorolskiy" target="_blank"><img class="footer-icon" src="/MyToDo/icon/instagram-icon.png" alt="instagram-icon"></a>
+        <a href="https://www.instagram.com/rkhorolskiy" target="_blank"><i class="fa fa-instagram instagram" aria-hidden="true"></i></a>
     </div>
 </footer>
 </body>

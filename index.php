@@ -1,6 +1,5 @@
 <?php
 require $_SERVER['DOCUMENT_ROOT'] . '/MyToDo/db/dbconfig.php';
-require $_SERVER['DOCUMENT_ROOT'] . '/MyToDo/timeOrient.php';
 
 if(isset($_COOKIE["email"]))
 {

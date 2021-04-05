@@ -156,7 +156,7 @@ if (isset($_COOKIE["email"]) == 1):
 
         <form action="/MyToDo/action/add.php" method="POST">
             <div class="form-group">
-                <!--<h1 class="heading"><em>In the "<?/*=$_COOKIE["name_group"]*/?>" group)</em></h1>-->
+                <h1 class="heading"><em>In the "<?=$_COOKIE["name_group"]?>" group)</em></h1>
             </div>
             <div class="form-group">
                 <div class="input-group mb-3">

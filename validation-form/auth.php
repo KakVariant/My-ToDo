@@ -19,6 +19,15 @@ if (count($user) == 0)
     header("Location: /MyToDo/greeting/login.php");
     exit();
 }
+
+$id = $user["group_task"];
+require $_SERVER['DOCUMENT_ROOT'] . '/MyToDo/db/dbconfig.php';
+$result = $mysql->query("SELECT * FROM `group_task` WHERE `id` = '$id'");
+$mysql->close();
+$gr_id = $result->fetch_assoc();
+
+setcookie("name_group", $gr_id["name"], time() + 3600 * 4, "/");
+
 setcookie("email", $email, time() + 3600 * 4, "/");
 setcookie("sort", "all", time() + 3600 * 4, "/");
 date_default_timezone_set('Europe/Kiev');

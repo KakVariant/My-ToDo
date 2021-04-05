@@ -35,6 +35,8 @@ if (count($user) == 0) {
     $mysql->query("INSERT INTO `register`(`secure_key`, `email`, `name`, `pass`, `theme`, `group_task`) VALUES('$email', '$emailDefault', '$name', '$pass', 1, 0)");
     $mysql->close();
 
+
+    setcookie("name_group", "0", time() + 3600 * 4, "/");
     setcookie("email", $email, time() + 3600 * 4, "/");
     setcookie("name", $name, time() + 3600 * 4, "/");
     setcookie("sort", "all", time() + 3600 * 4, "/");

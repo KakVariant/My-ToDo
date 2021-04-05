@@ -42,7 +42,7 @@ if (isset($_COOKIE["email"])) {
                 <?php
                 $params = array(
                     'client_id'     => '364584403394-8f3op4c3f6r3idtfhdm9bfj7shsc595e.apps.googleusercontent.com',
-                    'redirect_uri'  => 'https://mytodotest.000webhostapp.com/MyToDo/greeting/login_google.php',
+                    'redirect_uri'  => 'http://localhost/MyToDo/greeting/login_google.php',
                     'response_type' => 'code',
                     'scope'         => 'https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile',
                     'state'         => '123'

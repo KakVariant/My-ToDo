@@ -1,0 +1,35 @@
+.profile-name
+{
+    color: #999c9f;
+}
+
+.profile-name-mobile
+{
+    color: #999c9f;
+    border-bottom: 1px solid #999c9f;
+    padding-bottom: 10px;
+    margin-bottom: 5px;
+    font-size: 20px;
+    display: none;
+}
+
+.navbar
+{
+    text-align: center;
+}
+
+@media (max-width: 768px)
+{
+    .profile-name
+    {
+        display: none;
+    }
+}
+
+@media (max-width: 425px)
+{
+    .profile-name-mobile
+    {
+        display: block;
+    }
+}

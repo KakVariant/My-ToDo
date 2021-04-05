@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo $title; ?></title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/MyToDo/style/header.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
@@ -80,6 +81,12 @@
         <?php
         if($_SERVER['REQUEST_URI'] != "/MyToDo/greeting/login.php" && $_SERVER['REQUEST_URI'] != "/MyToDo/greeting/reg.php"  && $_SERVER['REQUEST_URI'] != "/MyToDo/action/group-task/group-task.php" && $_SERVER['REQUEST_URI'] != "/MyToDo/action/recovery.php")
         {
+
+            echo "
+            <div class=\"profile-name-mobile\"><em><b>Profile: ".$_COOKIE["name"].".</b></em></div>
+            ";
+
+
             echo "
           <li class=\"nav-item\">
           <a href=\"/MyToDo/action/group-task/group-task.php\" class=\"nav-link\">Группы заданий</a>
@@ -133,7 +140,7 @@
       if($_SERVER['REQUEST_URI'] != "/MyToDo/greeting/login.php" && $_SERVER['REQUEST_URI'] != "/MyToDo/greeting/reg.php" && $_SERVER['REQUEST_URI'] != "/MyToDo/action/recovery.php")
       {
           echo "
-            <div style=\"color: #999c9f;\"><em><b>Profile: ".$_COOKIE["name"].".</b></em></div>
+            <div class=\"profile-name\"><em><b>Profile: ".$_COOKIE["name"].".</b></em></div>
             ";
       }
       ?>

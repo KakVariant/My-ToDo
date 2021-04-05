@@ -38,11 +38,39 @@ if (isset($_COOKIE["email"])) {
             <div class="form-group">
                 <a class="btn btn-outline-primary btn-lg btn-block" href="reg.php">Регистрация</a>
             </div>
+            <div class="form-group">
+                <?php
+                $params = array(
+                    'client_id'     => '364584403394-8f3op4c3f6r3idtfhdm9bfj7shsc595e.apps.googleusercontent.com',
+                    'redirect_uri'  => 'https://mytodotest.000webhostapp.com/MyToDo/greeting/login_google.php',
+                    'response_type' => 'code',
+                    'scope'         => 'https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile',
+                    'state'         => '123'
+                );
+
+                /* Локалка:
+                      http://localhost/MyToDo/greeting/login_google.php
+                    ---------------------------------------------------------
+                   Хостинг:
+                      https://mytodotest.000webhostapp.com/MyToDo/greeting/login_google.php
+                */
+
+                $url = 'https://accounts.google.com/o/oauth2/auth?' . urldecode(http_build_query($params));
+                echo '
+                <a class="google_login btn btn-outline-primary btn-lg btn-block" href="' . $url . '">
+                Авторизация через <i class="fa fa-google icon-btn-google" aria-hidden="true"></i><b>oogle</b>
+                </a>
+                ';
+                ?>
+            </div>
             <div class="form-group d-flex justify-content-end">
               <small class="form-text text-muted">Забыли пароль?<a href="/MyToDo/action/recovery.php" class="btn btn-link btn-sm">Восстановить</a></small>
             </div>
         </form>
     </div>
+<br />
+<br />
 <?php
+
 include $_SERVER['DOCUMENT_ROOT'] . '/MyToDo/body/footer.php';
 ?>

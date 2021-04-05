@@ -9,12 +9,11 @@ if(isset($_COOKIE["email"]))
     $thm = $result->fetch_assoc();
     setcookie("name", $thm["name"], time() + 3600 * 4, "/");
     setcookie("theme", $thm["theme"], time() + 3600 * 4, "/");
-    if (!isset($_COOKIE["group"]))
+    $id = $thm["group_task"];
+    if (isset($_COOKIE["group"]) == 0 || $id == 0)
     {
-        if ($thm["group_task"] != 0)
-        {
-            setcookie("group", $thm["group_task"], time() + 3600 * 4, "/");
-        }
+        header("Location: /MyToDo/action/group-task/group-task.php");
+        exit();
     }
     header("Location: action/todo.php");
 }

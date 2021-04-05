@@ -78,6 +78,14 @@
     <div class="collapse navbar-collapse" id="collapsibleNavbar">
       <ul class="navbar-nav">
         <?php
+        if($_SERVER['REQUEST_URI'] != "/MyToDo/greeting/login.php" && $_SERVER['REQUEST_URI'] != "/MyToDo/greeting/reg.php"  && $_SERVER['REQUEST_URI'] != "/MyToDo/action/group-task/group-task.php" && $_SERVER['REQUEST_URI'] != "/MyToDo/action/recovery.php")
+        {
+            echo "
+          <li class=\"nav-item\">
+          <a href=\"/MyToDo/action/group-task/group-task.php\" class=\"nav-link\">Группы заданий</a>
+          </li>
+          ";
+        }
         if($_SERVER['REQUEST_URI'] != "/MyToDo/greeting/login.php" && $_SERVER['REQUEST_URI'] != "/MyToDo/greeting/reg.php"  && $_SERVER['REQUEST_URI'] != "/MyToDo/action/diary.php" && $_SERVER['REQUEST_URI'] != "/MyToDo/action/recovery.php")
         {
             echo "
@@ -121,5 +129,13 @@
           ?>
       </ul>
     </div>
+      <?php
+      if($_SERVER['REQUEST_URI'] != "/MyToDo/greeting/login.php" && $_SERVER['REQUEST_URI'] != "/MyToDo/greeting/reg.php" && $_SERVER['REQUEST_URI'] != "/MyToDo/action/recovery.php")
+      {
+          echo "
+            <div style=\"color: #999c9f;\"><em><b>Profile: ".$_COOKIE["name"].".</b></em></div>
+            ";
+      }
+      ?>
   </nav>
   <br>

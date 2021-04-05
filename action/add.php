@@ -4,6 +4,7 @@ if (isset($_POST["task"]) == 1)
     $email = $_COOKIE["email"];
     $task = $_POST["task"];
     $priority = 0;
+    $group_id = $_COOKIE["group"];
 
     if (isset($_POST['add_low']))
     {
@@ -23,7 +24,7 @@ if (isset($_POST["task"]) == 1)
     if($task != "")
     {
       require $_SERVER['DOCUMENT_ROOT'] . '/MyToDo/db/dbconfig.php';
-      $mysql->query("INSERT INTO `todo` (`task`, `activity`, `priority`, `user_id`) VALUES ('$task', '0', '$priority', '$email')");
+      $mysql->query("INSERT INTO `todo` (`task`, `activity`, `priority`, `user_id`, `group_id`) VALUES ('$task', '0', '$priority', '$email', '$group_id')");
       $mysql->close();
     }
     header("Location: /MyToDo/index.php");

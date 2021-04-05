@@ -32,7 +32,7 @@ $user = $result->fetch_assoc();
 if (count($user) == 0) {
     $pass = md5($pass . "fh43gfh4");
 
-    $mysql->query("INSERT INTO `register`(`secure_key`, `email`, `name`, `pass`, `theme`) VALUES('$email', '$emailDefault', '$name', '$pass', 1)");
+    $mysql->query("INSERT INTO `register`(`secure_key`, `email`, `name`, `pass`, `theme`, `group_task`) VALUES('$email', '$emailDefault', '$name', '$pass', 1, 0)");
     $mysql->close();
 
     setcookie("email", $email, time() + 3600 * 4, "/");

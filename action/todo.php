@@ -7,6 +7,10 @@ require $_SERVER['DOCUMENT_ROOT'] . '/MyToDo/timeOrient.php';
 ?>
 <?php
 
+if (isset($_COOKIE["group"]) != 1)
+{
+    header("Location: /MyToDo/action/group-task/group-task.php");
+}
 
 // функция для проверки (Есть ли в указаном приоритете задачи)
 
@@ -14,7 +18,9 @@ function isPriority($priority)
 {
     require $_SERVER['DOCUMENT_ROOT'] . '/MyToDo/db/dbconfig.php';
     $email = $_COOKIE["email"];
-    $result = $mysql->query("SELECT * FROM `todo` WHERE `priority` = '$priority' AND `activity` = '0' AND `user_id` = '$email'");
+    $group_id = $_COOKIE["group"];
+
+    $result = $mysql->query("SELECT * FROM `todo` WHERE `priority` = '$priority' AND `activity` = '0' AND `user_id` = '$email' AND `group_id` = '$group_id'");
     $mysql->close();
     $task = $result->fetch_assoc();
     if ($task)
@@ -34,7 +40,9 @@ function isDone()
 {
     require $_SERVER['DOCUMENT_ROOT'] . '/MyToDo/db/dbconfig.php';
     $email =  $_COOKIE["email"];
-    $result = $mysql->query("SELECT * FROM `todo` WHERE `activity` = '1'  AND `user_id` = '$email'");
+    $group_id = $_COOKIE["group"];
+
+    $result = $mysql->query("SELECT * FROM `todo` WHERE `activity` = '1'  AND `user_id` = '$email' AND `group_id` = '$group_id'");
     $mysql->close();
     $task = $result->fetch_assoc();
     if ($task)
@@ -128,11 +136,13 @@ function query()
     require $_SERVER['DOCUMENT_ROOT'] . '/MyToDo/db/dbconfig.php';
 
     $email = $_COOKIE["email"];
+    $group_id = $_COOKIE["group"];
 
-    $result = $mysql->query("SELECT * FROM `todo` WHERE `user_id` = '$email' ORDER BY `todo`.`id` DESC");
+    $result = $mysql->query("SELECT * FROM `todo` WHERE `user_id` = '$email' AND `group_id` = '$group_id' ORDER BY `todo`.`id` DESC");
     $mysql->close();
     return $result;
 }
+
 if (isset($_COOKIE["email"]) == 1):
     ?>
     <link rel="stylesheet" href="/MyToDo/style/todo.css">
@@ -146,7 +156,7 @@ if (isset($_COOKIE["email"]) == 1):
 
         <form action="/MyToDo/action/add.php" method="POST">
             <div class="form-group">
-                <h1 class="heading"><em>Your ToDo, <?=$_COOKIE["name"]?>)</em></h1>
+                <!--<h1 class="heading"><em>In the "<?/*=$_COOKIE["name_group"]*/?>" group)</em></h1>-->
             </div>
             <div class="form-group">
                 <div class="input-group mb-3">

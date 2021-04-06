@@ -18,7 +18,7 @@ $email = $_POST["email"];
     $newPass = rand(1000, 999999);
     $subject = "Восстановление пароля";
     $subject = "=?utf-8?B?".base64_encode($subject)."?=";
-    $headers = "From: rkhorolskij@gmail.com\r\nReply-to: $email\r\nContent-type: text/html; charset=utf-8\r\n";
+    $headers = "From: rkhorolskij@gmail.com\r\nReply-to: $email\r\nContent-type: text/html; charset=\"utf-8\"\r\n";
     $message = "Вы успешно восстановили пароль на сайте https://mytodotest.000webhostapp.com/MyToDo\nВаш новый пароль: ".$newPass;
 
     mail($email, $subject, $message, $headers);

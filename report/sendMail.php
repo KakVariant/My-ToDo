@@ -16,11 +16,11 @@ $question = $_POST["question"];
 $to = "rkhorolskij@gmail.com";
 $subject = "Поддержка сайта MyToDo";
 $subject = "=?utf-8?B?".base64_encode($subject)."?=";
-$headers = "From: $from\r\nReply-to: $from\r\nContent-tupe: text/plain; charset=utf-8\r\n";
+$headers = "From: $from\r\nReply-to: $from\r\nContent-type: text/html; charset=\"utf-8\"\r\n";
 
 $message = "Email отправителя - " . $from . " \nТекст сообщения - " . $question;
 
-  $_SESSION["rep"] = "Сообщение успешно отправлено! Спасибо за отзыв/жилобу.";
+  $_SESSION["rep"] = "Сообщение успешно отправлено! Спасибо за отзыв/жалобу.";
   mail($to, $subject, $message, $headers);
 
 header("Location: report.php");

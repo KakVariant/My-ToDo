@@ -1,0 +1,193 @@
+.body
+{
+    width: 100%;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    background-color: #1597bb;
+    opacity: 0;
+    transition: 2s;
+    transform: translateY(-100%);
+    padding-top: 2%;
+    overflow: hidden;
+}
+
+
+.container-body
+{
+    padding-top: 2%;
+}
+
+
+.title-letter
+{
+    width: 50px;
+    height: 50px;
+    font-size: 25px;
+}
+
+
+.text-letter
+{
+    width: 25px;
+    height: 25px;
+    font-size: 14px;
+}
+
+
+.letter
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 3px solid black;
+    margin: 2px;
+    text-transform: uppercase;
+    background-color: white;
+    color: black;
+    font-weight: bold;
+}
+
+.space
+{
+    opacity: 0;
+    width: 30px;
+}
+
+.pole-go
+{
+    transform: translateY(0%);
+    transition: 2s;
+    opacity: 1;
+}
+
+
+.result
+{
+    background-color: #f6f6f6;
+    width: 80%;
+    border: 1px solid gray;
+    border-radius: 5px;
+    align-items: center;
+}
+
+.dummy-done
+{
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #067a00;
+    margin: -1px;
+    border: 1px solid #067a00;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    transition: 0.3s;
+}
+
+.dummy-done:hover
+{
+    transition: 0.3s;
+    color: #f6f6f6;
+    background-color: #067a00;
+    cursor: pointer;
+}
+
+.dummy-delete
+{
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #910000;
+    margin: -1px;
+    border: 1px solid #910000;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    transition: 0.3s;
+}
+
+.dummy-delete:hover
+{
+    transition: 0.3s;
+    color: #f6f6f6;
+    background-color: #910000;
+    cursor: pointer;
+}
+
+.result-text
+{
+    font-weight: bold;
+    opacity: 0.9;
+}
+
+.custom-text
+{
+    width: 80%;
+}
+
+.btn-add-task
+{
+    width: 80%;
+}
+
+.btn-rull
+{
+    width: 80%;
+}
+
+.custom-text
+{
+    margin-bottom: 50px;
+    margin-top: 20px;
+}
+
+.res-title, .result, .add-task
+{
+    margin-bottom: 20px;
+    transform: translateX(150%);
+    transition: 1.5s;
+}
+
+.visability
+{
+    transform: translateX(0);
+    transition: 1.5s;
+}
+
+.content
+{
+    overflow: hidden;
+}
+
+.yakybovich
+{
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    right: -10px;
+    bottom: -5px;
+    transform: translateX(150%);
+    transition: 1s;
+}
+
+.yakybovich-on
+{
+    transform: translateX(0%);
+    transition: 1s;
+}
+
+.exit-btn
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    top: 5px;
+    right: 5px;
+}

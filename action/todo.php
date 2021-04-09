@@ -243,6 +243,7 @@ if (isset($_COOKIE["email"]) == 1):
             </form>
         </form>
     </div>
+    <script src="/MyToDo/script/redir.js"></script>
 <?php
 endif;
 ?>

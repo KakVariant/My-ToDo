@@ -1,4 +1,3 @@
-<link rel="stylesheet" href="/MyToDo/style/font-awesome/css/font-awesome.min.css">
 <link rel="stylesheet" href="/MyToDo/style/footer.css">
 <br />
 <br />

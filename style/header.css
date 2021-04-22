@@ -1,6 +1,14 @@
 .profile-name
 {
     color: #999c9f;
+    transition: 0.3s;
+}
+
+.profile-name:hover
+{
+    transition: 0.3s;
+    color: #f6f6f6;
+    text-decoration: none;
 }
 
 .profile-name-mobile
